@@ -1,3 +1,5 @@
+'use client';
+
 import { useToast } from "@/hooks/use-toast";
 import { shippingAddressDefaultValues } from "@/lib/constants";
 import { shippingAddressSchema } from "@/lib/validators";
