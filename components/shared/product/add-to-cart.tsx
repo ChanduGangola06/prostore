@@ -91,6 +91,7 @@ const AddToCart = ({ cart, item }: { cart?: Cart, item: CartItem; }) => {
             Add To Cart
         </Button>
     );
-}
+};
+
 
 export default AddToCart;
