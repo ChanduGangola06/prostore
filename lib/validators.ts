@@ -8,14 +8,15 @@ const currency = z
     "Price must have exactly two decimal places (e.g., 49.99)"
   );
 
+// Schema for inserting products
 export const insertProductSchema = z.object({
-  name: z.string().min(3, "Name must be at least 3 characters"),
-  slug: z.string().min(3, "Slug must be at least 3 characters"),
-  category: z.string().min(3, "Category must be at least 3 characters"),
-  brand: z.string().min(3, "Brand must be at least 3 characters"),
-  description: z.string().min(3, "Description must be at least 3 characters"),
+  name: z.string().min(3, 'Name must be at least 3 characters'),
+  slug: z.string().min(3, 'Slug must be at least 3 characters'),
+  category: z.string().min(3, 'Category must be at least 3 characters'),
+  brand: z.string().min(3, 'Brand must be at least 3 characters'),
+  description: z.string().min(3, 'Description must be at least 3 characters'),
   stock: z.coerce.number(),
-  images: z.array(z.string()).min(1, "Product must have at least one image"),
+  images: z.array(z.string()).min(1, 'Product must have at least one image'),
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   price: currency,
@@ -52,17 +53,12 @@ export const signUpFormSchema = z
 
 // Cart Schemas
 export const cartItemSchema = z.object({
-  productId: z.string().min(1, "Product is required"),
-  name: z.string().min(1, "Name is required"),
-  slug: z.string().min(1, "Slug is required"),
-  qty: z.number().int().nonnegative("Quantity must be a non-negative number"),
-  image: z.string().min(1, "Image is required"),
-  price: z
-    .number()
-    .refine(
-      (value) => /^\d+(\.\d{2})?$/.test(Number(value).toFixed(2)),
-      "Price must have exactly two decimal places (e.g., 49.99)"
-    ),
+  productId: z.string().min(1, 'Product is required'),
+  name: z.string().min(1, 'Name is required'),
+  slug: z.string().min(1, 'Slug is required'),
+  qty: z.number().int().nonnegative('Quantity must be a positive number'),
+  image: z.string().min(1, 'Image is required'),
+  price: currency,
 });
 
 export const insertCartSchema = z.object({
@@ -71,7 +67,7 @@ export const insertCartSchema = z.object({
   totalPrice: currency,
   shippingPrice: currency,
   taxPrice: currency,
-  sessionCartId: z.string().min(1, "Session cart id is required"),
+  sessionCartId: z.string().min(1, 'Session cart id is required'),
   userId: z.string().optional().nullable(),
 });
 
